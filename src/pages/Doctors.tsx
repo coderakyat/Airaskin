@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { GraduationCap, Award, Briefcase, CheckCircle } from 'lucide-react';
 import { doctors } from '../data/doctors';
-import Button from '../components/Button';
+import Button from '../components/ui/Button';
 
 export default function Doctors() {
   return (

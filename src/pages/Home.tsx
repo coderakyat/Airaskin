@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Award, Users, Heart, TrendingUp, Star } from 'lucide-react';
-import Button from '../components/Button';
+import Button from '../components/ui/Button';
 import { services } from '../data/services';
 
 export default function Home() {

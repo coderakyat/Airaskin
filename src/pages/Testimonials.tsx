@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Star, Quote, Sparkles } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
-import Button from '../components/Button';
+import Button from '../components/ui/Button';
 
 export default function Testimonials() {
   return (

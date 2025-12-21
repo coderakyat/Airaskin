@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Clock, Sparkles, ArrowRight, Check } from 'lucide-react';
 import { services } from '../data/services';
-import Button from '../components/Button';
+import Button from '../components/ui/Button';
 
 export default function Services() {
   const [selectedCategory, setSelectedCategory] = useState('Semua');
@@ -46,11 +46,10 @@ export default function Services() {
                 onClick={() => setSelectedCategory(category)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 rounded-full font-medium transition-all ${
-                  selectedCategory === category
+                className={`px-6 py-3 rounded-full font-medium transition-all ${selectedCategory === category
                     ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-500/30'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {category}
               </motion.button>

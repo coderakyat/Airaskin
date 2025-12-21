@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { gallery, categories } from '../data/gallery';
-import Button from '../components/Button';
+import Button from '../components/ui/Button';
 
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('Semua');
@@ -44,11 +44,10 @@ export default function Gallery() {
                 onClick={() => setSelectedCategory(category)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 rounded-full font-medium transition-all ${
-                  selectedCategory === category
+                className={`px-6 py-3 rounded-full font-medium transition-all ${selectedCategory === category
                     ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-500/30'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {category}
               </motion.button>
@@ -169,9 +168,8 @@ function GalleryCard({ item, index }: { item: any; index: number }) {
             className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl"
           >
             <ArrowRight
-              className={`w-6 h-6 text-pink-500 transition-transform ${
-                showAfter ? 'rotate-180' : ''
-              }`}
+              className={`w-6 h-6 text-pink-500 transition-transform ${showAfter ? 'rotate-180' : ''
+                }`}
             />
           </motion.button>
         </div>

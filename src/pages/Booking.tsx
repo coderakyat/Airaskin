@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Phone, Calendar, MessageSquare, Sparkles, CheckCircle } from 'lucide-react';
 import { services } from '../data/services';
-import Button from '../components/Button';
+import Button from '../components/ui/Button';
 
 export default function Booking() {
   const [formData, setFormData] = useState({
