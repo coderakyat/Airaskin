@@ -1,19 +1,25 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Instagram, Facebook, Mail, Phone, MapPin, Sparkles } from 'lucide-react';
 
 export default function Footer() {
   const quickLinks = [
-    { path: '/', label: 'Beranda' },
-    { path: '/about', label: 'Tentang Kami' },
-    { path: '/services', label: 'Layanan' },
-    { path: '/doctors', label: 'Tim Dokter' }
+    { id: 'beranda', label: 'Beranda' },
+    { id: 'tentang-kami', label: 'Tentang Kami' },
+    { id: 'layanan', label: 'Layanan' },
+    { id: 'tim-dokter', label: 'Tim Dokter' }
   ];
 
   const socialLinks = [
     { icon: Instagram, href: '#', label: 'Instagram' },
     { icon: Facebook, href: '#', label: 'Facebook' }
   ];
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
@@ -60,13 +66,13 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-6">Tautan Cepat</h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
+                <li key={link.id}>
+                  <button
+                    onClick={() => scrollToSection(link.id)}
                     className="text-gray-400 hover:text-pink-400 transition-colors text-sm"
                   >
                     {link.label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>

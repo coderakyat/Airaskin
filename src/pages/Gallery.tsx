@@ -1,16 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight } from 'lucide-react';
-import { gallery, categories } from '../data/gallery';
+import { fetchGallery, fetchGalleryCategories, GalleryItem } from '../services/supabaseService';
 import Button from '../components/ui/Button';
 
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('Semua');
+  const [gallery, setGallery] = useState<GalleryItem[]>([]);
+  const [categories, setCategories] = useState<string[]>(['Semua']);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      setLoading(true);
+      const [galleryData, categoriesData] = await Promise.all([
+        fetchGallery(),
+        fetchGalleryCategories()
+      ]);
+      setGallery(galleryData);
+      setCategories(categoriesData);
+      setLoading(false);
+    }
+    loadData();
+  }, []);
 
   const filteredGallery = selectedCategory === 'Semua'
     ? gallery
     : gallery.filter(item => item.category === selectedCategory);
+
+  if (loading) {
+    return (
+      <div className="pt-24 min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-24">
@@ -45,8 +70,8 @@ export default function Gallery() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`px-6 py-3 rounded-full font-medium transition-all ${selectedCategory === category
-                    ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-500/30'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-500/30'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
               >
                 {category}
@@ -100,7 +125,7 @@ export default function Gallery() {
   );
 }
 
-function GalleryCard({ item, index }: { item: any; index: number }) {
+function GalleryCard({ item, index }: { item: GalleryItem; index: number }) {
   const [showAfter, setShowAfter] = useState(false);
 
   return (

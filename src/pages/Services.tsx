@@ -1,18 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Clock, Sparkles, ArrowRight, Check } from 'lucide-react';
-import { services } from '../data/services';
+import { fetchServices, fetchServiceCategories, Service } from '../services/supabaseService';
 import Button from '../components/ui/Button';
 
 export default function Services() {
   const [selectedCategory, setSelectedCategory] = useState('Semua');
+  const [services, setServices] = useState<Service[]>([]);
+  const [categories, setCategories] = useState<string[]>(['Semua']);
+  const [loading, setLoading] = useState(true);
 
-  const categories = ['Semua', ...Array.from(new Set(services.map(s => s.category)))];
+  useEffect(() => {
+    async function loadData() {
+      setLoading(true);
+      const [servicesData, categoriesData] = await Promise.all([
+        fetchServices(),
+        fetchServiceCategories()
+      ]);
+      setServices(servicesData);
+      setCategories(categoriesData);
+      setLoading(false);
+    }
+    loadData();
+  }, []);
 
   const filteredServices = selectedCategory === 'Semua'
     ? services
     : services.filter(s => s.category === selectedCategory);
+
+  if (loading) {
+    return (
+      <div className="pt-24 min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-24">
@@ -47,8 +70,8 @@ export default function Services() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`px-6 py-3 rounded-full font-medium transition-all ${selectedCategory === category
-                    ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-500/30'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-500/30'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
               >
                 {category}
@@ -107,7 +130,7 @@ export default function Services() {
   );
 }
 
-function ServiceCard({ service, index }: { service: any; index: number }) {
+function ServiceCard({ service, index }: { service: Service; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -171,7 +194,7 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
               whileTap={{ scale: 0.95 }}
               className="px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-medium flex items-center space-x-2"
             >
-              <span>Reservasi</span>
+              <span>Konsultasi</span>
               <motion.div animate={{ x: isHovered ? 5 : 0 }}>
                 <ArrowRight size={18} />
               </motion.div>

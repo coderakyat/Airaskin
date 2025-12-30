@@ -1,10 +1,32 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Star, Quote, Sparkles } from 'lucide-react';
-import { testimonials } from '../data/testimonials';
+import { fetchTestimonials, Testimonial } from '../services/supabaseService';
 import Button from '../components/ui/Button';
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadTestimonials() {
+      setLoading(true);
+      const data = await fetchTestimonials();
+      setTestimonials(data);
+      setLoading(false);
+    }
+    loadTestimonials();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="pt-24 min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-500"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-24">
       <section className="gradient-mesh py-24">
@@ -109,7 +131,7 @@ export default function Testimonials() {
   );
 }
 
-function TestimonialCard({ testimonial, index }: { testimonial: any; index: number }) {
+function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
