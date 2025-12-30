@@ -1,14 +1,17 @@
-import { motion } from 'framer-motion';
+import React from 'react';
 import { LucideIcon } from 'lucide-react';
+// import { cn } from '../../lib/utils'; // Removed unused import to fix lint error
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'outline' | 'outline-light';
   size?: 'sm' | 'md' | 'lg';
   icon?: LucideIcon;
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
+  disabled?: boolean;
+  'aria-label'?: string;
 }
 
 export default function Button({
@@ -18,40 +21,42 @@ export default function Button({
   icon: Icon,
   onClick,
   type = 'button',
-  className = ''
+  className = '',
+  disabled = false,
+  'aria-label': ariaLabel
 }: ButtonProps) {
-  const baseStyles = 'relative font-medium rounded-full overflow-hidden transition-all inline-flex items-center justify-center';
+  const baseStyles = 'relative inline-flex items-center justify-center font-bold transition-all duration-200 border-b-[4px] active:border-b-0 active:translate-y-[4px] focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
-    primary: 'bg-gradient-to-r from-pink-500 to-rose-500 text-white hover:shadow-lg hover:shadow-pink-500/50',
-    secondary: 'bg-white text-gray-900 hover:bg-gray-50 shadow-md',
-    outline: 'border-2 border-pink-500 text-pink-500 hover:bg-pink-50'
+    // Primary: Rouge
+    primary: 'bg-primary border-primary-dark text-white hover:bg-primary-light hover:border-primary',
+    // Secondary: Lily (used as light background)
+    secondary: 'bg-secondary/20 border-secondary text-dark hover:bg-secondary/30 hover:border-secondary-dark',
+    // Outline: Dark border, text dark
+    outline: 'bg-transparent border-dark/20 text-dark hover:bg-dark/5 hover:border-dark',
+    // Outline Light: White border, text white (for dark backgrounds)
+    'outline-light': 'bg-transparent border-white/30 text-white hover:bg-white/10 hover:border-white'
   };
 
   const sizes = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg'
+    sm: 'px-4 py-2 text-sm rounded-xl',
+    md: 'px-6 py-3 text-base rounded-2xl',
+    lg: 'px-8 py-4 text-lg rounded-2xl'
   };
 
+  // Construct the class name
+  const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
+
   return (
-    <motion.button
+    <button
       type={type}
       onClick={onClick}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      disabled={disabled}
+      aria-label={ariaLabel}
+      className={combinedClassName}
     >
-      <span className="relative z-10 flex items-center space-x-2">
-        {Icon && <Icon size={size === 'sm' ? 16 : size === 'md' ? 18 : 20} />}
-        <span>{children}</span>
-      </span>
-      <motion.div
-        className="absolute inset-0 bg-white/20"
-        initial={{ x: '-100%' }}
-        whileHover={{ x: '100%' }}
-        transition={{ duration: 0.5 }}
-      />
-    </motion.button>
+      {Icon && <Icon size={size === 'sm' ? 16 : size === 'md' ? 18 : 20} className="mr-2" aria-hidden="true" />}
+      {children}
+    </button>
   );
 }

@@ -13,8 +13,6 @@ const pathLabels: Record<string, string> = {
     '/doctors': 'Tim Dokter',
     '/gallery': 'Galeri',
     '/testimonials': 'Testimoni',
-    '/about': 'Tentang Kami',
-    '/book': 'Konsultasi',
     '/home': 'Beranda',
 };
 
@@ -42,7 +40,7 @@ export default function Breadcrumb() {
         <motion.nav
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-r from-gray-50 to-pink-50/30 border-b border-gray-100"
+            className="pt-24 bg-secondary/30 border-b border-gray-100"
         >
             <div className="container mx-auto px-6 lg:px-12 py-4">
                 <ol className="flex items-center space-x-2 text-sm">
@@ -54,13 +52,13 @@ export default function Breadcrumb() {
                                     <ChevronRight className="w-4 h-4 text-gray-400 mx-2" />
                                 )}
                                 {isLast ? (
-                                    <span className="font-medium text-pink-500">
+                                    <span className="font-medium text-primary">
                                         {breadcrumb.label}
                                     </span>
                                 ) : (
                                     <Link
                                         to={breadcrumb.path}
-                                        className="flex items-center text-gray-600 hover:text-pink-500 transition-colors"
+                                        className="flex items-center text-gray-600 hover:text-primary transition-colors"
                                     >
                                         {index === 0 && <Home className="w-4 h-4 mr-1" />}
                                         {breadcrumb.label}

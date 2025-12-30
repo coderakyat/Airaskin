@@ -22,16 +22,16 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
-      <div className="container mx-auto px-6 lg:px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+    <footer role="contentinfo" className="bg-dark text-white">
+      <div className="container mx-auto px-6 lg:px-12 py-12 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -39,7 +39,7 @@ export default function Footer() {
                 <p className="text-sm text-gray-400 -mt-1">Skin Clinic</p>
               </div>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
               Klinik kecantikan terpercaya yang menghadirkan solusi perawatan kulit dengan teknologi terkini dan tim profesional.
             </p>
             <div className="flex space-x-4">
@@ -48,7 +48,7 @@ export default function Footer() {
                   key={index}
                   href={social.href}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-gradient-to-br hover:from-pink-400 hover:to-rose-500 transition-all"
+                  className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-primary transition-all"
                   aria-label={social.label}
                 >
                   <social.icon size={18} />
@@ -69,7 +69,7 @@ export default function Footer() {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="text-gray-400 hover:text-pink-400 transition-colors text-sm"
+                    className="text-white/60 hover:text-primary-light transition-colors text-sm"
                   >
                     {link.label}
                   </button>
@@ -86,10 +86,10 @@ export default function Footer() {
           >
             <h4 className="text-lg font-semibold mb-6">Layanan Populer</h4>
             <ul className="space-y-3">
-              <li className="text-gray-400 text-sm">Facial Glow Treatment</li>
-              <li className="text-gray-400 text-sm">Acne Treatment Pro</li>
-              <li className="text-gray-400 text-sm">Anti-Aging Signature</li>
-              <li className="text-gray-400 text-sm">Brightening Booster</li>
+              <li className="text-white/60 text-sm">Facial Glow Treatment</li>
+              <li className="text-white/60 text-sm">Acne Treatment Pro</li>
+              <li className="text-white/60 text-sm">Anti-Aging Signature</li>
+              <li className="text-white/60 text-sm">Brightening Booster</li>
             </ul>
           </motion.div>
 
@@ -102,19 +102,19 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-6">Hubungi Kami</h4>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
-                <MapPin size={18} className="text-pink-400 mt-1 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">
+                <MapPin size={18} className="text-primary-light mt-1 flex-shrink-0" />
+                <span className="text-white/60 text-sm">
                   Jl. Sudirman No. 123<br />
                   Jakarta Selatan, 12190
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <Phone size={18} className="text-pink-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">+62 812-3456-7890</span>
+                <Phone size={18} className="text-primary-light flex-shrink-0" />
+                <span className="text-white/60 text-sm">+62 812-3456-7890</span>
               </li>
               <li className="flex items-center space-x-3">
-                <Mail size={18} className="text-pink-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">info@airaskinclinic.com</span>
+                <Mail size={18} className="text-primary-light flex-shrink-0" />
+                <span className="text-white/60 text-sm">info@airaskinclinic.com</span>
               </li>
             </ul>
           </motion.div>
@@ -122,12 +122,12 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-gray-400 text-sm">
+            <p className="text-white/60 text-sm">
               &copy; 2024 AIRA Skin Clinic. All rights reserved.
             </p>
-            <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-pink-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-pink-400 transition-colors">Terms of Service</a>
+            <div className="flex space-x-6 text-sm text-white/60">
+              <a href="#" className="hover:text-primary-light transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-primary-light transition-colors">Terms of Service</a>
             </div>
           </div>
         </div>

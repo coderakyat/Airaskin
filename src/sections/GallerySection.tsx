@@ -21,13 +21,13 @@ export default function GallerySection() {
     if (loading) {
         return (
             <div className="py-24 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-500"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
             </div>
         );
     }
 
     return (
-        <section className="py-24 bg-white dark:bg-gray-900">
+        <section className="py-24 bg-white dark:bg-dark">
             <div className="container mx-auto px-6 lg:px-12">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -35,10 +35,10 @@ export default function GallerySection() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-                        Hasil <span className="text-gradient">Nyata</span>
+                    <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-dark dark:text-white">
+                        Hasil <span className="text-primary">Nyata</span>
                     </h2>
-                    <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    <p className="text-dark/70 dark:text-secondary/80 max-w-2xl mx-auto">
                         Transformasi nyata dari klien kami
                     </p>
                 </motion.div>
@@ -75,9 +75,9 @@ function GalleryCard({ item, index }: { item: GalleryItem; index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="group bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover-lift"
+            className="group bg-white dark:bg-dark-light rounded-3xl overflow-hidden shadow-lg hover-lift"
         >
-            <div className="relative h-64 overflow-hidden">
+            <div className="relative aspect-video overflow-hidden">
                 <AnimatePresence mode="wait">
                     {!showAfter ? (
                         <motion.div
@@ -87,8 +87,15 @@ function GalleryCard({ item, index }: { item: GalleryItem; index: number }) {
                             exit={{ opacity: 0 }}
                             className="absolute inset-0"
                         >
-                            <img src={item.before} alt="Before" className="w-full h-full object-cover" />
-                            <div className="absolute top-4 left-4 bg-gray-900/80 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            <img
+                                src={item.before}
+                                alt={`${item.title} - Sebelum treatment`}
+                                className="w-full h-full object-cover"
+                                loading="lazy"
+                                width={400}
+                                height={256}
+                            />
+                            <div className="absolute top-4 left-4 bg-dark/80 text-white px-3 py-1 rounded-full text-xs font-semibold" aria-hidden="true">
                                 SEBELUM
                             </div>
                         </motion.div>
@@ -100,8 +107,15 @@ function GalleryCard({ item, index }: { item: GalleryItem; index: number }) {
                             exit={{ opacity: 0 }}
                             className="absolute inset-0"
                         >
-                            <img src={item.after} alt="After" className="w-full h-full object-cover" />
-                            <div className="absolute top-4 left-4 bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            <img
+                                src={item.after}
+                                alt={`${item.title} - Sesudah treatment`}
+                                className="w-full h-full object-cover"
+                                loading="lazy"
+                                width={400}
+                                height={256}
+                            />
+                            <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold" aria-hidden="true">
                                 SESUDAH
                             </div>
                         </motion.div>
@@ -114,16 +128,20 @@ function GalleryCard({ item, index }: { item: GalleryItem; index: number }) {
                         whileTap={{ scale: 0.9 }}
                         onMouseEnter={() => setShowAfter(true)}
                         onMouseLeave={() => setShowAfter(false)}
-                        className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl"
+                        onFocus={() => setShowAfter(true)}
+                        onBlur={() => setShowAfter(false)}
+                        className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        aria-label={showAfter ? 'Lihat foto sebelum treatment' : 'Lihat foto sesudah treatment'}
+                        aria-pressed={showAfter}
                     >
-                        <ArrowRight className={`w-5 h-5 text-pink-500 transition-transform ${showAfter ? 'rotate-180' : ''}`} />
+                        <ArrowRight className={`w-5 h-5 text-primary transition-transform ${showAfter ? 'rotate-180' : ''}`} aria-hidden="true" />
                     </motion.button>
                 </div>
             </div>
 
             <div className="p-4">
-                <h3 className="font-bold text-gray-900 dark:text-white">{item.title}</h3>
-                <p className="text-xs text-pink-500">{item.treatment}</p>
+                <h3 className="font-bold text-dark dark:text-white">{item.title}</h3>
+                <p className="text-xs text-primary">{item.treatment}</p>
             </div>
         </motion.div>
     );

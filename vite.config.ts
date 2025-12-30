@@ -10,8 +10,19 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  optimizeDeps: {
-    exclude: ['lucide-react'],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Vendor chunks for better caching
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-motion': ['framer-motion'],
+          'vendor-icons': ['lucide-react'],
+          'vendor-supabase': ['@supabase/supabase-js'],
+        },
+      },
+    },
+    // Optimize chunk size warnings
+    chunkSizeWarningLimit: 500,
   },
 });
-

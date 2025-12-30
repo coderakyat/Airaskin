@@ -22,14 +22,14 @@ export default function Doctors() {
   if (loading) {
     return (
       <div className="pt-24 min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   return (
     <div className="pt-24">
-      <section className="gradient-mesh py-24">
+      <section className="bg-secondary/30 py-24">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -37,9 +37,9 @@ export default function Doctors() {
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-              Tim <span className="text-gradient">Dokter Profesional</span>
+              Tim <span className="text-primary">Dokter Profesional</span>
             </h1>
-            <p className="text-xl text-gray-700 leading-relaxed">
+            <p className="text-xl text-dark/80 leading-relaxed">
               Dokter spesialis kulit bersertifikat dengan pengalaman dan keahlian terbaik
             </p>
           </motion.div>
@@ -60,10 +60,10 @@ export default function Doctors() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <div className="inline-flex flex-col items-center bg-gradient-to-br from-pink-50 to-white p-8 rounded-3xl border border-pink-100">
-              <Award className="w-12 h-12 text-pink-500 mb-4" />
-              <h3 className="text-2xl font-bold mb-2 text-gray-900">Bergabung dengan Tim Kami</h3>
-              <p className="text-gray-600 mb-6 max-w-md">
+            <div className="inline-flex flex-col items-center bg-white p-8 rounded-3xl border border-secondary">
+              <Award className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-2xl font-bold mb-2 text-dark">Bergabung dengan Tim Kami</h3>
+              <p className="text-dark/70 mb-6 max-w-md">
                 Kami selalu mencari dokter berkualitas untuk bergabung dengan tim profesional kami
               </p>
               <a href="mailto:career@airaskinclinic.com">
@@ -74,7 +74,7 @@ export default function Doctors() {
         </div>
       </section>
 
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-pink-50/30">
+      <section className="py-24 bg-secondary/30">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -83,9 +83,9 @@ export default function Doctors() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-              Keunggulan <span className="text-gradient">Tim Kami</span>
+              Keunggulan <span className="text-primary">Tim Kami</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-dark/70 max-w-2xl mx-auto">
               Mengapa pasien mempercayai tim dokter kami
             </p>
           </motion.div>
@@ -105,11 +105,11 @@ export default function Doctors() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white p-8 rounded-3xl text-center hover-lift"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-rose-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <item.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900">{item.title}</h3>
-                <p className="text-gray-600 text-sm">{item.description}</p>
+                <h3 className="text-xl font-bold mb-2 text-dark">{item.title}</h3>
+                <p className="text-dark/70 text-sm">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -135,7 +135,7 @@ function DoctorCard({ doctor, index }: { doctor: Doctor; index: number }) {
           alt={doctor.name}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-black/40" />
 
         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
           <h3 className="text-2xl font-bold mb-1">{doctor.name}</h3>
@@ -143,46 +143,46 @@ function DoctorCard({ doctor, index }: { doctor: Doctor; index: number }) {
         </div>
 
         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-          <p className="text-xs font-semibold text-pink-500">{doctor.experience}</p>
+          <p className="text-xs font-semibold text-primary">{doctor.experience}</p>
         </div>
       </div>
 
       <div className="p-6">
         <div className="mb-4">
           <div className="flex items-center space-x-2 mb-2">
-            <Briefcase size={16} className="text-pink-500" />
-            <p className="text-sm font-semibold text-gray-900">Spesialisasi</p>
+            <Briefcase size={16} className="text-primary" />
+            <p className="text-sm font-semibold text-dark">Spesialisasi</p>
           </div>
-          <p className="text-sm text-gray-600 ml-6">{doctor.specialization}</p>
+          <p className="text-sm text-dark/70 ml-6">{doctor.specialization}</p>
         </div>
 
         <div className="mb-4">
           <div className="flex items-center space-x-2 mb-2">
-            <GraduationCap size={16} className="text-pink-500" />
-            <p className="text-sm font-semibold text-gray-900">Pendidikan</p>
+            <GraduationCap size={16} className="text-primary" />
+            <p className="text-sm font-semibold text-dark">Pendidikan</p>
           </div>
-          <p className="text-sm text-gray-600 ml-6">{doctor.education}</p>
+          <p className="text-sm text-dark/70 ml-6">{doctor.education}</p>
         </div>
 
-        <p className="text-sm text-gray-600 mb-4 leading-relaxed">{doctor.bio}</p>
+        <p className="text-sm text-dark/70 mb-4 leading-relaxed">{doctor.bio}</p>
 
-        <div className="pt-4 border-t border-gray-100">
-          <p className="text-xs font-semibold text-gray-900 mb-2">Sertifikasi</p>
+        <div className="pt-4 border-t border-accent/30">
+          <p className="text-xs font-semibold text-dark mb-2">Sertifikasi</p>
           <div className="space-y-2">
             {doctor.certifications.map((cert: string, idx: number) => (
               <div key={idx} className="flex items-start space-x-2">
-                <CheckCircle size={14} className="text-pink-500 mt-0.5 flex-shrink-0" />
-                <p className="text-xs text-gray-600">{cert}</p>
+                <CheckCircle size={14} className="text-primary mt-0.5 flex-shrink-0" />
+                <p className="text-xs text-dark/70">{cert}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <Link to="/book" className="block mt-6">
+        <Link to="/#cta" className="block mt-6">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-medium"
+            className="w-full px-6 py-3 bg-primary text-white rounded-full font-medium"
           >
             Konsultasi dengan {doctor.name.split(' ')[1]}
           </motion.button>

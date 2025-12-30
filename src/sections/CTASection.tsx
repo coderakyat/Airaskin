@@ -12,38 +12,44 @@ export default function CTASection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="relative overflow-hidden rounded-[3rem] bg-gray-900 px-6 py-16 sm:px-16 sm:py-24 lg:flex lg:items-center lg:justify-between"
+                    className="relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-dark px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-24 flex flex-col items-center text-center"
                 >
                     {/* Background Decor */}
                     <div className="absolute inset-0 overflow-hidden">
-                        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-96 h-96 bg-gradient-to-br from-pink-500/20 to-purple-500/20 blur-3xl rounded-full" />
-                        <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-96 h-96 bg-gradient-to-tr from-rose-500/20 to-orange-500/20 blur-3xl rounded-full" />
+                        <img
+                            src="https://images.pexels.com/photos/3762875/pexels-photo-3762875.jpeg?auto=compress&cs=tinysrgb&w=800"
+                            alt="Background"
+                            className="absolute inset-0 w-full h-full object-cover opacity-20"
+                        />
+
+                        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-96 h-96 bg-primary/20 blur-3xl rounded-full" />
+                        <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-96 h-96 bg-secondary/20 blur-3xl rounded-full" />
                     </div>
 
-                    <div className="relative z-10 max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
+                    <div className="relative z-10 max-w-2xl mx-auto">
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
                             Wujudkan Kulit <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400">
+                            <span className="text-primary-light">
                                 Impianmu Sekarang
                             </span>
                         </h2>
-                        <p className="mt-6 text-lg leading-8 text-gray-300">
+                        <p className="mt-6 text-lg leading-8 text-secondary">
                             Dapatkan perawatan terbaik dari dokter spesialis kami dan nikmati promo spesial untuk kunjungan pertamamu.
                         </p>
                     </div>
 
-                    <div className="relative z-10 mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-end lg:mt-0 lg:ml-8">
-                        <Link to="/book">
+                    <div className="relative z-10 mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
                             <Button size="lg" icon={Calendar} className="w-full sm:w-auto">
-                                Konsultasi Sekarang
+                                Hubungi Kami
                             </Button>
-                        </Link>
-                        <Link to="/promo">
+                        </a>
+                        <Link to="/services">
                             {/* Note: Assuming there might be a promo page or just a placeholder for now. 
                     If no promo page exists, it might link to services or book with a param. 
                     Using a secondary button style for variety. */}
-                            <Button size="lg" variant="outline" className="w-full sm:w-auto text-white border-white hover:bg-white/10" icon={Sparkles}>
-                                Dapatkan Promo
+                            <Button size="lg" variant="outline-light" className="w-full sm:w-auto" icon={Sparkles}>
+                                Lihat Layanan
                             </Button>
                         </Link>
                     </div>

@@ -1,29 +1,39 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
-import LandingPage from './pages/LandingPage';
-import About from './pages/About';
-import Services from './pages/Services';
-import Doctors from './pages/Doctors';
-import Gallery from './pages/Gallery';
-import Testimonials from './pages/Testimonials';
-import BookingPage from './pages/BookingPage';
 import ScrollToTop from './components/utils/ScrollToTop';
+
+// Lazy load pages for code splitting
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const Services = lazy(() => import('./pages/Services'));
+const Doctors = lazy(() => import('./pages/Doctors'));
+const Gallery = lazy(() => import('./pages/Gallery'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+// Loading fallback component
+function PageLoader() {
+    return (
+        <div className="min-h-screen flex items-center justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary" />
+        </div>
+    );
+}
 
 export default function App() {
     return (
         <Router>
             <ScrollToTop />
-            <Routes>
-                <Route element={<MainLayout />}>
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/services" element={<Services />} />
-                    <Route path="/doctors" element={<Doctors />} />
-                    <Route path="/gallery" element={<Gallery />} />
-                    <Route path="/testimonials" element={<Testimonials />} />
-                    <Route path="/book" element={<BookingPage />} />
-                </Route>
-            </Routes>
+            <Suspense fallback={<PageLoader />}>
+                <Routes>
+                    <Route element={<MainLayout />}>
+                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/services" element={<Services />} />
+                        <Route path="/doctors" element={<Doctors />} />
+                        <Route path="/gallery" element={<Gallery />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Route>
+                </Routes>
+            </Suspense>
         </Router>
     );
 }

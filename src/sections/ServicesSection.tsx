@@ -25,13 +25,13 @@ export default function ServicesSection({ limit }: ServicesSectionProps) {
     if (loading) {
         return (
             <div className="py-24 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-500"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
             </div>
         );
     }
 
     return (
-        <section className="py-24 bg-white dark:bg-gray-900">
+        <section className="py-24 bg-white dark:bg-dark">
             <div className="container mx-auto px-6 lg:px-12">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -39,10 +39,10 @@ export default function ServicesSection({ limit }: ServicesSectionProps) {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-                        Layanan <span className="text-gradient">Premium</span>
+                    <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-dark dark:text-white">
+                        Layanan <span className="text-primary">Premium</span>
                     </h2>
-                    <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    <p className="text-dark/70 dark:text-secondary/80 max-w-2xl mx-auto">
                         Treatment kecantikan dengan teknologi terkini
                     </p>
                 </motion.div>
@@ -55,39 +55,39 @@ export default function ServicesSection({ limit }: ServicesSectionProps) {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="group bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover-lift"
+                            className="group bg-white dark:bg-dark-light rounded-3xl overflow-hidden shadow-lg hover-lift flex flex-col h-full"
                         >
-                            <div className="relative h-48 overflow-hidden">
+                            <div className="relative aspect-video overflow-hidden">
                                 <img
                                     src={service.image}
                                     alt={service.title}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
                                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                                    <p className="text-xs font-semibold text-pink-500">{service.category}</p>
+                                    <p className="text-xs font-semibold text-primary">{service.category}</p>
                                 </div>
                                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center space-x-1">
-                                    <Clock size={12} className="text-gray-700" />
-                                    <p className="text-xs font-medium text-gray-700">{service.duration}</p>
+                                    <Clock size={12} className="text-dark/70" />
+                                    <p className="text-xs font-medium text-dark/70">{service.duration}</p>
                                 </div>
                             </div>
 
                             <div className="p-6">
-                                <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{service.title}</h3>
-                                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">{service.description}</p>
+                                <h3 className="text-xl font-bold mb-2 text-dark dark:text-white">{service.title}</h3>
+                                <p className="text-dark/70 dark:text-secondary/80 text-sm mb-4 line-clamp-2">{service.description}</p>
 
                                 <div className="space-y-2 mb-4">
                                     {service.benefits.slice(0, 2).map((benefit, idx) => (
                                         <div key={idx} className="flex items-center space-x-2">
-                                            <Check size={14} className="text-pink-500" />
-                                            <p className="text-sm text-gray-600 dark:text-gray-300">{benefit}</p>
+                                            <Check size={14} className="text-primary" />
+                                            <p className="text-sm text-dark/70 dark:text-secondary/80">{benefit}</p>
                                         </div>
                                     ))}
                                 </div>
 
-                                <div className="flex justify-between items-center pt-4 border-t border-gray-100 dark:border-gray-700">
-                                    <p className="text-xl font-bold text-pink-500">{service.price}</p>
-                                    <Link to="/book">
+                                <div className="flex justify-between items-center pt-4 border-t border-accent/30 dark:border-accent/10">
+                                    <p className="text-xl font-bold text-primary">{service.price}</p>
+                                    <Link to="/#cta">
                                         <Button size="sm">Konsultasi</Button>
                                     </Link>
                                 </div>

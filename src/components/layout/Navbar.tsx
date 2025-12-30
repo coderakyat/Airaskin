@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sparkles, ChevronDown } from 'lucide-react';
+import { Menu, X, Sparkles } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 type NavLink = {
@@ -14,7 +14,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('beranda');
-  const [showServicesDropdown, setShowServicesDropdown] = useState(false);
+
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function Navbar() {
   useEffect(() => {
     if (!isLandingPage) return;
 
-    const sectionIds = ['beranda', 'tentang-kami', 'layanan', 'tim-dokter', 'hasil-nyata', 'testimoni'];
+    const sectionIds = ['beranda', 'tentang-kami', 'layanan', 'tim-dokter', 'hasil-nyata'];
 
     const observerOptions = {
       root: null,
@@ -67,8 +67,7 @@ export default function Navbar() {
     { id: 'tentang-kami', label: 'Tentang Kami', type: 'section' },
     { id: 'layanan', label: 'Layanan', type: 'page', path: '/services' },
     { id: 'tim-dokter', label: 'Tim Dokter', type: 'page', path: '/doctors' },
-    { id: 'hasil-nyata', label: 'Galeri', type: 'page', path: '/gallery' },
-    { id: 'testimoni', label: 'Testimoni', type: 'page', path: '/testimonials' }
+    { id: 'hasil-nyata', label: 'Galeri', type: 'page', path: '/gallery' }
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -110,6 +109,8 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
+        role="navigation"
+        aria-label="Navigasi utama"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
@@ -123,15 +124,15 @@ export default function Navbar() {
               <motion.div
                 whileHover={{ rotate: 180 }}
                 transition={{ duration: 0.3 }}
-                className="w-10 h-10 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center"
+                className="w-10 h-10 bg-primary rounded-full flex items-center justify-center"
               >
                 <Sparkles className="w-5 h-5 text-white" />
               </motion.div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 group-hover:text-gradient transition-all">
+                <h1 className="text-2xl font-bold text-dark group-hover:text-primary transition-all">
                   AIRA
                 </h1>
-                <p className="text-xs text-gray-600 -mt-1">Skin Clinic</p>
+                <p className="text-xs text-dark/70 -mt-1">Skin Clinic</p>
               </div>
             </Link>
 
@@ -140,88 +141,51 @@ export default function Navbar() {
                 <div
                   key={link.id}
                   className="relative"
-                  onMouseEnter={() => link.id === 'layanan' && setShowServicesDropdown(true)}
-                  onMouseLeave={() => link.id === 'layanan' && setShowServicesDropdown(false)}
                 >
                   <button
                     onClick={() => handleNavClick(link)}
-                    className={`relative text-sm font-medium transition-colors flex items-center gap-1 ${isActive(link)
-                      ? 'text-pink-500'
-                      : 'text-gray-700 hover:text-pink-500'
+                    className={`relative text-sm font-medium transition-colors ${isActive(link)
+                      ? 'text-primary'
+                      : 'text-dark hover:text-primary'
                       }`}
                   >
                     {link.label}
-                    {link.id === 'layanan' && (
-                      <ChevronDown className={`w-4 h-4 transition-transform ${showServicesDropdown ? 'rotate-180' : ''}`} />
-                    )}
                   </button>
                   {isActive(link) && (
                     <motion.div
                       layoutId="navbar-indicator"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-rose-500"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
                       initial={false}
                       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                     />
                   )}
-
-                  {/* Services Dropdown */}
-                  <AnimatePresence>
-                    {link.id === 'layanan' && showServicesDropdown && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-56 glass rounded-2xl p-3 shadow-xl"
-                      >
-                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white/80 rotate-45 rounded-sm" />
-                        <Link
-                          to="/services"
-                          className="block px-4 py-3 text-sm text-gray-700 hover:text-pink-500 hover:bg-pink-50 rounded-xl transition-all"
-                          onClick={() => setShowServicesDropdown(false)}
-                        >
-                          Semua Layanan
-                        </Link>
-                        <button
-                          onClick={() => {
-                            scrollToSection('layanan');
-                            setShowServicesDropdown(false);
-                          }}
-                          className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:text-pink-500 hover:bg-pink-50 rounded-xl transition-all"
-                        >
-                          Layanan Unggulan
-                        </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </div>
               ))}
             </div>
 
             <div className="hidden lg:flex items-center space-x-4">
-              <Link to="/book">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="relative px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-medium overflow-hidden group"
-                >
-                  <span className="relative z-10">Konsultasi Sekarang</span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-rose-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity"
-                  />
-                </motion.button>
-              </Link>
+              <motion.button
+                onClick={() => scrollToSection('cta')}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-6 py-2 bg-primary text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-all"
+              >
+                <span className="relative z-10">Konsultasi Sekarang</span>
+              </motion.button>
             </div>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-900 hover:text-pink-500 transition-colors"
+              className="lg:hidden p-2 text-dark hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
           </div>
         </div>
-      </motion.nav>
+      </motion.nav >
 
       <AnimatePresence>
         {isMobileMenuOpen && (
@@ -234,23 +198,27 @@ export default function Navbar() {
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
             />
             <motion.div
+              id="mobile-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Menu navigasi"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25 }}
-              className="fixed top-0 right-0 bottom-0 w-80 glass-dark z-50 lg:hidden overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 w-full max-w-xs glass-dark z-50 lg:hidden overflow-y-auto"
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-8">
                   <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center space-x-2">
-                    <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                       <Sparkles className="w-4 h-4 text-white" />
                     </div>
                     <span className="text-lg font-bold text-white">AIRA</span>
                   </Link>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 text-white hover:text-pink-400 transition-colors"
+                    className="p-2 text-white hover:text-primary-light transition-colors"
                   >
                     <X size={24} />
                   </button>
@@ -267,8 +235,8 @@ export default function Navbar() {
                       <button
                         onClick={() => handleNavClick(link)}
                         className={`flex items-center justify-between w-full text-left px-4 py-3 text-lg font-medium rounded-xl transition-all ${isActive(link)
-                          ? 'text-pink-400 bg-white/10'
-                          : 'text-white hover:text-pink-400 hover:bg-white/5'
+                          ? 'text-primary-light bg-white/10'
+                          : 'text-white hover:text-primary-light hover:bg-white/5'
                           }`}
                       >
                         <span>{link.label}</span>
@@ -287,13 +255,12 @@ export default function Navbar() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ delay: navLinks.length * 0.1 }}
                     >
-                      <Link
-                        to="/book"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block w-full px-6 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-center rounded-xl font-medium shadow-lg shadow-pink-500/30"
+                      <button
+                        onClick={() => scrollToSection('cta')}
+                        className="block w-full px-6 py-4 bg-primary text-white text-center rounded-xl font-medium shadow-lg shadow-primary/30"
                       >
                         Konsultasi Sekarang
-                      </Link>
+                      </button>
                     </motion.div>
                   </div>
 
@@ -302,10 +269,8 @@ export default function Navbar() {
                     <p className="text-xs text-white/50 uppercase tracking-wider mb-3 px-4">Halaman Lainnya</p>
                     <div className="grid grid-cols-2 gap-2">
                       {[
-                        { label: 'Tentang Kami', path: '/about' },
                         { label: 'Galeri', path: '/gallery' },
                         { label: 'Tim Dokter', path: '/doctors' },
-                        { label: 'Testimoni', path: '/testimonials' },
                       ].map((item, index) => (
                         <motion.div
                           key={item.path}
@@ -317,8 +282,8 @@ export default function Navbar() {
                             to={item.path}
                             onClick={() => setIsMobileMenuOpen(false)}
                             className={`block px-3 py-2 text-sm rounded-lg transition-all ${location.pathname === item.path
-                                ? 'text-pink-400 bg-white/10'
-                                : 'text-white/70 hover:text-white hover:bg-white/5'
+                              ? 'text-primary-light bg-white/10'
+                              : 'text-white/70 hover:text-white hover:bg-white/5'
                               }`}
                           >
                             {item.label}
