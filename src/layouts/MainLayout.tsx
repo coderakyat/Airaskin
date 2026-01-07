@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import Breadcrumb from '../components/navigation/Breadcrumb';
-import ErrorBoundary from '../components/utils/ErrorBoundary';
+import ErrorBoundary from '../components/feedback/ErrorBoundary';
 
 export default function MainLayout() {
   return (

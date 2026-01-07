@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import ScrollToTop from './components/utils/ScrollToTop';
 
-// Lazy load pages for code splitting
-const LandingPage = lazy(() => import('./pages/LandingPage'));
-const Services = lazy(() => import('./pages/Services'));
-const Doctors = lazy(() => import('./pages/Doctors'));
-const Gallery = lazy(() => import('./pages/Gallery'));
+// Lazy load pages from features for code splitting
+const LandingPage = lazy(() => import('./features/home/LandingPage'));
+const ServicesPage = lazy(() => import('./features/services/ServicesPage'));
+const DoctorsPage = lazy(() => import('./features/doctors/DoctorsPage'));
+const GalleryPage = lazy(() => import('./features/gallery/GalleryPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading fallback component
@@ -27,9 +27,9 @@ export default function App() {
                 <Routes>
                     <Route element={<MainLayout />}>
                         <Route path="/" element={<LandingPage />} />
-                        <Route path="/services" element={<Services />} />
-                        <Route path="/doctors" element={<Doctors />} />
-                        <Route path="/gallery" element={<Gallery />} />
+                        <Route path="/services" element={<ServicesPage />} />
+                        <Route path="/doctors" element={<DoctorsPage />} />
+                        <Route path="/gallery" element={<GalleryPage />} />
                         <Route path="*" element={<NotFound />} />
                     </Route>
                 </Routes>
