@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'; import { useState, useEffect } from 'react';
-import { ArrowRight, Sparkles, Award, Users, Heart, TrendingUp, Star } from 'lucide-react';
+import { ArrowRight, Sparkles, Award, Users, Heart, Star } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
 export default function HeroSection() {
@@ -40,7 +40,7 @@ export default function HeroSection() {
         }, 4000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [carouselImages.length]);
 
     const marqueeText = ['Beauty', 'Wellness', 'Confidence', 'Glow', 'Radiance', 'Excellence'];
 
