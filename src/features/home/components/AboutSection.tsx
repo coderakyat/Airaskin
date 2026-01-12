@@ -36,7 +36,7 @@ export default function AboutSection() {
     return (
         <div>
             {/* Header Section */}
-            <section className="bg-secondary/30 py-24">
+            <section className="bg-secondary/30 py-24 overflow-hidden">
                 <div className="container mx-auto px-6 lg:px-12">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -55,7 +55,7 @@ export default function AboutSection() {
             </section>
 
             {/* Story Section */}
-            <section className="py-24 bg-white">
+            <section className="py-24 bg-white overflow-hidden">
                 <div className="container mx-auto px-6 lg:px-12">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <motion.div
@@ -186,7 +186,7 @@ export default function AboutSection() {
             </section>
 
             {/* Values Section */}
-            <section className="py-24 bg-white">
+            <section className="py-24 bg-white overflow-hidden">
                 <div className="container mx-auto px-6 lg:px-12">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -227,7 +227,7 @@ export default function AboutSection() {
             </section>
 
             {/* Vision & Mission Section */}
-            <section className="py-24 bg-secondary/30">
+            <section className="py-24 bg-secondary/30 overflow-hidden">
                 <div className="container mx-auto px-6 lg:px-12">
                     <div className="grid lg:grid-cols-2 gap-12">
                         <motion.div

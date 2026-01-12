@@ -7,7 +7,7 @@ import ErrorBoundary from '../components/feedback/ErrorBoundary';
 export default function MainLayout() {
   return (
     <ErrorBoundary>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col overflow-x-hidden">
         {/* Skip link for accessibility */}
         <a
           href="#main-content"

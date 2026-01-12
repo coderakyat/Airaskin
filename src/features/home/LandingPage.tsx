@@ -7,7 +7,7 @@ import { GallerySection } from '@/features/gallery';
 
 export default function LandingPage() {
     return (
-        <div>
+        <div className="overflow-x-hidden">
             {/* Beranda / Hero Section */}
             <section id="beranda">
                 <HeroSection />
