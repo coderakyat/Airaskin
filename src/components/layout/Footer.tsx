@@ -35,7 +35,7 @@ export default function Footer() {
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold">AIRA</h3>
+                <h3 className="text-2xl font-bold">Contoh5</h3>
                 <p className="text-sm text-gray-400 -mt-1">Skin Clinic</p>
               </div>
             </div>
@@ -114,7 +114,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={18} className="text-primary-light flex-shrink-0" />
-                <span className="text-white/60 text-sm">info@airaskinclinic.com</span>
+                <span className="text-white/60 text-sm">info@contoh5.com</span>
               </li>
             </ul>
           </motion.div>
@@ -123,7 +123,7 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-white/60 text-sm">
-              &copy; 2024 AIRA Skin Clinic. All rights reserved.
+              &copy; 2024 Contoh5. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm text-white/60">
               <a href="#" className="hover:text-primary-light transition-colors">Privacy Policy</a>

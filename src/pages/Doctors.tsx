@@ -66,7 +66,7 @@ export default function Doctors() {
               <p className="text-dark/70 mb-6 max-w-md">
                 Kami selalu mencari dokter berkualitas untuk bergabung dengan tim profesional kami
               </p>
-              <a href="mailto:career@airaskinclinic.com">
+              <a href="mailto:career@contoh5.com">
                 <Button>Kirim Lamaran</Button>
               </a>
             </div>

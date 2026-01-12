@@ -130,7 +130,7 @@ export default function Navbar() {
               </motion.div>
               <div>
                 <h1 className="text-2xl font-bold text-dark group-hover:text-primary transition-all">
-                  AIRA
+                  Contoh5
                 </h1>
                 <p className="text-xs text-dark/70 -mt-1">Skin Clinic</p>
               </div>
@@ -214,7 +214,7 @@ export default function Navbar() {
                     <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                       <Sparkles className="w-4 h-4 text-white" />
                     </div>
-                    <span className="text-lg font-bold text-white">AIRA</span>
+                    <span className="text-lg font-bold text-white">Contoh5</span>
                   </Link>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}

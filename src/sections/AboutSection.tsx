@@ -45,7 +45,7 @@ export default function AboutSection() {
                         className="text-center max-w-3xl mx-auto"
                     >
                         <h2 className="text-5xl lg:text-6xl font-bold mb-6">
-                            Tentang <span className="text-primary">AIRA Skin Clinic</span>
+                            Tentang <span className="text-primary">Contoh5</span>
                         </h2>
                         <p className="text-xl text-dark/80 leading-relaxed">
                             Perjalanan kami dimulai dari passion untuk membantu setiap orang menemukan kecantikan alami mereka
@@ -74,7 +74,7 @@ export default function AboutSection() {
                             </h3>
 
                             <p className="text-dark/70 leading-relaxed">
-                                AIRA Skin Clinic didirikan pada tahun 2019 dengan visi untuk menghadirkan solusi perawatan kulit yang holistik dan profesional. Kami percaya bahwa setiap orang berhak mendapatkan kulit sehat dan kepercayaan diri yang maksimal.
+                                Contoh5 didirikan pada tahun 2019 dengan visi untuk menghadirkan solusi perawatan kulit yang holistik dan profesional. Kami percaya bahwa setiap orang berhak mendapatkan kulit sehat dan kepercayaan diri yang maksimal.
                             </p>
 
                             <p className="text-dark/70 leading-relaxed">
@@ -99,7 +99,7 @@ export default function AboutSection() {
                                 >
                                     <img
                                         src="https://images.pexels.com/photos/3997379/pexels-photo-3997379.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                        alt="Interior klinik kecantikan AIRA yang modern dan nyaman"
+                                        alt="Interior klinik kecantikan Contoh5 yang modern dan nyaman"
                                         className="w-full aspect-[4/5] object-cover rounded-3xl shadow-lg"
                                         loading="lazy"
                                         width={300}
@@ -129,7 +129,7 @@ export default function AboutSection() {
                                     />
                                     <img
                                         src="https://images.pexels.com/photos/3997992/pexels-photo-3997992.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                        alt="Dokter spesialis kulit AIRA Skin Clinic"
+                                        alt="Dokter spesialis kulit Contoh5"
                                         className="w-full aspect-[4/5] object-cover rounded-3xl shadow-lg"
                                         loading="lazy"
                                         width={300}

@@ -109,7 +109,7 @@ export default function HeroSection() {
                                 >
                                     <img
                                         src="https://images.pexels.com/photos/3997379/pexels-photo-3997379.jpeg?auto=compress&cs=tinysrgb&w=800"
-                                        alt="Perawatan kulit profesional di AIRA Skin Clinic"
+                                        alt="Perawatan kulit profesional di Contoh5"
                                         className="w-full h-full object-cover"
                                         loading="eager"
                                         fetchPriority="high"
@@ -181,7 +181,7 @@ export default function HeroSection() {
                         className="text-center mb-16"
                     >
                         <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-dark">
-                            Mengapa Memilih <span className="text-primary">AIRA?</span>
+                            Mengapa Memilih <span className="text-primary">Contoh5?</span>
                         </h2>
                         <p className="text-dark/80 max-w-2xl mx-auto">
                             Kami berkomitmen memberikan perawatan terbaik dengan standar medis tertinggi

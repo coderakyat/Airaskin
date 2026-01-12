@@ -114,7 +114,7 @@ INSERT INTO testimonials (name, age, image, rating, review, treatment) VALUES
     32,
     'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop',
     5,
-    'Akhirnya jerawat saya teratasi setelah bertahun-tahun mencoba berbagai produk. Terima kasih tim Airaskin!',
+    'Akhirnya jerawat saya teratasi setelah bertahun-tahun mencoba berbagai produk. Terima kasih tim Contoh5!',
     'Acne Clear Program'
 ),
 (

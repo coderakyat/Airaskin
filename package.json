@@ -1,8 +1,8 @@
 {
-  "name": "airaskin-landing-page",
+  "name": "contoh5-landing-page",
   "private": true,
   "version": "1.0.0",
-  "description": "AIRA Skin Clinic - Landing page klinik kecantikan profesional",
+  "description": "Contoh5 - Landing page klinik kecantikan profesional",
   "type": "module",
   "scripts": {
     "dev": "vite",
