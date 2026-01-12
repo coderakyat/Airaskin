@@ -2,6 +2,8 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import ScrollToTop from './components/utils/ScrollToTop';
+import { ReservationProvider } from './context/ReservationContext';
+import ReservationModal from './components/ui/ReservationModal';
 
 // Lazy load pages from features for code splitting
 const LandingPage = lazy(() => import('./features/home/LandingPage'));
@@ -21,19 +23,22 @@ function PageLoader() {
 
 export default function App() {
     return (
-        <Router>
-            <ScrollToTop />
-            <Suspense fallback={<PageLoader />}>
-                <Routes>
-                    <Route element={<MainLayout />}>
-                        <Route path="/" element={<LandingPage />} />
-                        <Route path="/services" element={<ServicesPage />} />
-                        <Route path="/doctors" element={<DoctorsPage />} />
-                        <Route path="/gallery" element={<GalleryPage />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Route>
-                </Routes>
-            </Suspense>
-        </Router>
+        <ReservationProvider>
+            <Router>
+                <ScrollToTop />
+                <Suspense fallback={<PageLoader />}>
+                    <Routes>
+                        <Route element={<MainLayout />}>
+                            <Route path="/" element={<LandingPage />} />
+                            <Route path="/services" element={<ServicesPage />} />
+                            <Route path="/doctors" element={<DoctorsPage />} />
+                            <Route path="/gallery" element={<GalleryPage />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Route>
+                    </Routes>
+                </Suspense>
+                <ReservationModal />
+            </Router>
+        </ReservationProvider>
     );
 }

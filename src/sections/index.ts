@@ -4,3 +4,4 @@ export { default as ServicesSection } from './ServicesSection';
 export { default as DoctorsSection } from './DoctorsSection';
 export { default as GallerySection } from './GallerySection';
 export { default as CTASection } from './CTASection';
+export { default as FAQSection } from './FAQSection';

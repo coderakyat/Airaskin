@@ -5,10 +5,12 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 import { useGallery } from './hooks/useGallery';
 import { GalleryItem } from '@/services/supabaseService';
 import Button from '@/components/ui/Button';
+import { useReservation } from '@/context/ReservationContext';
 
 export default function GalleryPage() {
     const [selectedCategory, setSelectedCategory] = useState('Semua');
     const { gallery, categories, loading } = useGallery();
+    const { openModal } = useReservation();
 
     const filteredGallery = selectedCategory === 'Semua'
         ? gallery
@@ -98,11 +100,9 @@ export default function GalleryPage() {
                         <p className="text-dark/70 mb-8 max-w-2xl mx-auto">
                             Setiap hasil adalah unik sesuai dengan kondisi kulit masing-masing. Konsultasikan dengan dokter kami untuk mendapatkan treatment yang tepat.
                         </p>
-                        <Link to="/#cta">
-                            <Button size="lg" icon={ArrowRight}>
-                                Mulai Konsultasi
-                            </Button>
-                        </Link>
+                        <Button size="lg" icon={ArrowRight} onClick={() => openModal()}>
+                            Mulai Konsultasi
+                        </Button>
                     </motion.div>
                 </div>
             </section>

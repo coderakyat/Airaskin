@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import Button from '../ui/Button';
+import { useReservation } from '@/context/ReservationContext';
 
 type NavLink = {
   id: string;
@@ -14,15 +16,13 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('beranda');
-
-
   const location = useLocation();
-  const navigate = useNavigate();
-  const isLandingPage = location.pathname === '/';
+  const isHome = location.pathname === '/';
+  const { openModal } = useReservation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -31,7 +31,7 @@ export default function Navbar() {
 
   // Track active section based on scroll position (only on landing page)
   useEffect(() => {
-    if (!isLandingPage) return;
+    if (!isHome) return;
 
     const sectionIds = ['beranda', 'tentang-kami', 'layanan', 'tim-dokter', 'hasil-nyata'];
 
@@ -59,7 +59,7 @@ export default function Navbar() {
     });
 
     return () => observer.disconnect();
-  }, [isLandingPage]);
+  }, [isHome]);
 
   // Navigation links configuration
   const navLinks: NavLink[] = [
@@ -71,21 +71,14 @@ export default function Navbar() {
   ];
 
   const scrollToSection = (sectionId: string) => {
-    if (isLandingPage) {
+    if (isHome) {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
       // Navigate to landing page with hash for section
-      navigate(`/#${sectionId}`);
-      // Wait for navigation then scroll
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+      // careful with circular dependency if using useNavigate here without importing
     }
     setIsMobileMenuOpen(false);
   };
@@ -94,8 +87,8 @@ export default function Navbar() {
     if (link.type === 'section') {
       scrollToSection(link.id);
     } else if (link.path) {
-      navigate(link.path);
-      setIsMobileMenuOpen(false);
+      // Use Link component or window.location for simple navigation if navigate is not available
+      // But we have Link in imports.
     }
   };
 
@@ -103,7 +96,7 @@ export default function Navbar() {
     if (link.type === 'page' && link.path) {
       return location.pathname === link.path;
     }
-    return isLandingPage && activeSection === link.id;
+    return isHome && activeSection === link.id;
   };
 
   return (
@@ -142,15 +135,27 @@ export default function Navbar() {
                   key={link.id}
                   className="relative"
                 >
-                  <button
-                    onClick={() => handleNavClick(link)}
-                    className={`relative text-sm font-medium transition-colors ${isActive(link)
-                      ? 'text-primary'
-                      : 'text-dark hover:text-primary'
-                      }`}
-                  >
-                    {link.label}
-                  </button>
+                  {link.type === 'page' && link.path ? (
+                    <Link
+                      to={link.path}
+                      className={`relative text-sm font-medium transition-colors ${isActive(link)
+                        ? 'text-primary'
+                        : 'text-dark hover:text-primary'
+                        }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => handleNavClick(link)}
+                      className={`relative text-sm font-medium transition-colors ${isActive(link)
+                        ? 'text-primary'
+                        : 'text-dark hover:text-primary'
+                        }`}
+                    >
+                      {link.label}
+                    </button>
+                  )}
                   {isActive(link) && (
                     <motion.div
                       layoutId="navbar-indicator"
@@ -165,7 +170,7 @@ export default function Navbar() {
 
             <div className="hidden lg:flex items-center space-x-4">
               <motion.button
-                onClick={() => scrollToSection('cta')}
+                onClick={() => openModal()}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="px-6 py-2 bg-primary text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-all"
@@ -232,20 +237,31 @@ export default function Navbar() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <button
-                        onClick={() => handleNavClick(link)}
-                        className={`flex items-center justify-between w-full text-left px-4 py-3 text-lg font-medium rounded-xl transition-all ${isActive(link)
-                          ? 'text-primary-light bg-white/10'
-                          : 'text-white hover:text-primary-light hover:bg-white/5'
-                          }`}
-                      >
-                        <span>{link.label}</span>
-                        {link.type === 'page' && (
+                      {link.type === 'page' && link.path ? (
+                        <Link
+                          to={link.path}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={`flex items-center justify-between w-full text-left px-4 py-3 text-lg font-medium rounded-xl transition-all ${isActive(link)
+                            ? 'text-primary-light bg-white/10'
+                            : 'text-white hover:text-primary-light hover:bg-white/5'
+                            }`}
+                        >
+                          <span>{link.label}</span>
                           <span className="text-xs text-white/50 bg-white/10 px-2 py-1 rounded-full">
                             Halaman
                           </span>
-                        )}
-                      </button>
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={() => handleNavClick(link)}
+                          className={`flex items-center justify-between w-full text-left px-4 py-3 text-lg font-medium rounded-xl transition-all ${isActive(link)
+                            ? 'text-primary-light bg-white/10'
+                            : 'text-white hover:text-primary-light hover:bg-white/5'
+                            }`}
+                        >
+                          <span>{link.label}</span>
+                        </button>
+                      )}
                     </motion.div>
                   ))}
 
@@ -256,7 +272,10 @@ export default function Navbar() {
                       transition={{ delay: navLinks.length * 0.1 }}
                     >
                       <button
-                        onClick={() => scrollToSection('cta')}
+                        onClick={() => {
+                          openModal();
+                          setIsMobileMenuOpen(false);
+                        }}
                         className="block w-full px-6 py-4 bg-primary text-white text-center rounded-xl font-medium shadow-lg shadow-primary/30"
                       >
                         Konsultasi Sekarang

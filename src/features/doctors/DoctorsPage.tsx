@@ -4,6 +4,7 @@ import { GraduationCap, Award, Briefcase, CheckCircle } from 'lucide-react';
 import { useDoctors } from './hooks/useDoctors';
 import { Doctor } from '@/services/supabaseService';
 import Button from '@/components/ui/Button';
+import { useReservation } from '@/context/ReservationContext';
 
 export default function DoctorsPage() {
     const { doctors, loading } = useDoctors();
@@ -109,6 +110,8 @@ export default function DoctorsPage() {
 }
 
 function DoctorCard({ doctor, index }: { doctor: Doctor; index: number }) {
+    const { openModal } = useReservation();
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -167,15 +170,16 @@ function DoctorCard({ doctor, index }: { doctor: Doctor; index: number }) {
                     </div>
                 </div>
 
-                <Link to="/#cta" className="block mt-6">
+                <div className="mt-6">
                     <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
+                        onClick={() => openModal(`Konsultasi dengan ${doctor.name}`)}
                         className="w-full px-6 py-3 bg-primary text-white rounded-full font-medium"
                     >
                         Konsultasi dengan {doctor.name.split(' ')[1]}
                     </motion.button>
-                </Link>
+                </div>
             </div>
         </motion.div>
     );

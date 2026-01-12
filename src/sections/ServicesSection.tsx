@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Clock, ArrowRight, Check } from 'lucide-react';
 import { fetchServices, Service } from '../services/supabaseService';
 import Button from '../components/ui/Button';
+import { useReservation } from '@/context/ReservationContext';
 
 interface ServicesSectionProps {
     limit?: number;
@@ -12,6 +13,7 @@ interface ServicesSectionProps {
 export default function ServicesSection({ limit }: ServicesSectionProps) {
     const [services, setServices] = useState<Service[]>([]);
     const [loading, setLoading] = useState(true);
+    const { openModal } = useReservation();
 
     useEffect(() => {
         async function loadServices() {
@@ -87,9 +89,7 @@ export default function ServicesSection({ limit }: ServicesSectionProps) {
 
                                 <div className="flex justify-between items-center pt-4 border-t border-accent/30 dark:border-accent/10">
                                     <p className="text-xl font-bold text-primary">{service.price}</p>
-                                    <Link to="/#cta">
-                                        <Button size="sm">Konsultasi</Button>
-                                    </Link>
+                                    <Button size="sm" onClick={() => openModal(service.title)}>Konsultasi</Button>
                                 </div>
                             </div>
                         </motion.div>

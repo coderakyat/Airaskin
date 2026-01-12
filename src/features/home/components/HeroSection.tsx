@@ -1,8 +1,11 @@
-import { motion, AnimatePresence } from 'framer-motion'; import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles, Award, Users, Heart, Star } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import { useReservation } from '@/context/ReservationContext';
 
 export default function HeroSection() {
+    const { openModal } = useReservation();
     const features = [
         {
             icon: Award,
@@ -81,7 +84,7 @@ export default function HeroSection() {
                             </p>
 
                             <div className="flex flex-wrap gap-4">
-                                <Button size="lg" icon={Sparkles} onClick={() => scrollToSection('konsultasi')}>
+                                <Button size="lg" icon={Sparkles} onClick={() => openModal()}>
                                     Konsultasi Sekarang
                                 </Button>
                                 <Button size="lg" variant="outline" icon={ArrowRight} onClick={() => scrollToSection('layanan')}>

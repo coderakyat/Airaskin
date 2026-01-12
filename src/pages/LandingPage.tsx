@@ -4,7 +4,8 @@ import {
     ServicesSection,
     DoctorsSection,
     GallerySection,
-    CTASection
+    CTASection,
+    FAQSection
 } from '../sections';
 
 export default function LandingPage() {
@@ -33,6 +34,11 @@ export default function LandingPage() {
             {/* Hasil Nyata / Gallery Section */}
             <section id="hasil-nyata">
                 <GallerySection />
+            </section>
+
+            {/* FAQ Section */}
+            <section id="faq">
+                <FAQSection />
             </section>
 
             {/* CTA Section */}
